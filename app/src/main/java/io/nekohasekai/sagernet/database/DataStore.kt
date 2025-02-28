@@ -123,18 +123,10 @@ object DataStore : OnPreferenceDataStoreChangeListener {
     var mixedPort: Int
         get() = getLocalPort(Key.MIXED_PORT, 2080)
         set(value) = saveLocalPort(Key.MIXED_PORT, value)
-    var localDNSPort: Int
-        get() = getLocalPort(Key.LOCAL_DNS_PORT, 6450)
-        set(value) {
-            saveLocalPort(Key.LOCAL_DNS_PORT, value)
-        }
 
     fun initGlobal() {
         if (configurationStore.getString(Key.MIXED_PORT) == null) {
             mixedPort = mixedPort
-        }
-        if (configurationStore.getString(Key.LOCAL_DNS_PORT) == null) {
-            localDNSPort = localDNSPort
         }
     }
 
@@ -169,9 +161,6 @@ object DataStore : OnPreferenceDataStoreChangeListener {
 
     // protocol
 
-    var muxType by configurationStore.stringToInt(Key.MUX_TYPE)
-    var muxProtocols by configurationStore.stringSet(Key.MUX_PROTOCOLS)
-    var muxConcurrency by configurationStore.stringToInt(Key.MUX_CONCURRENCY) { 8 }
     var globalAllowInsecure by configurationStore.boolean(Key.GLOBAL_ALLOW_INSECURE) { false }
 
     // old cache, DO NOT ADD
